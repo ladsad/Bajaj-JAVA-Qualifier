@@ -73,7 +73,15 @@ public class WebhookService {
 
     private String getSqlSolution() {
         
-        String sqlQuery = "SELECT * FROM your_table_name"; // PLACEHOLDER - REPLACE THIS!
+        String sqlQuery = "SELECT \r\n" + //
+                        "    p.AMOUNT AS SALARY,\r\n" + //
+                        "    CONCAT(e.FIRST_NAME, ' ', e.LAST_NAME) AS NAME,\r\n" + //
+                        "    FLOOR(DATEDIFF(CURDATE(), e.DOB) / 365.25) AS AGE,\r\n" + //
+                        "    d.DEPARTMENT_NAME\r\n" + //
+                        "FROM PAYMENTS p\r\n" + //
+                        "JOIN EMPLOYEE e ON p.EMP_ID = e.EMP_ID\r\n" + //
+                        "JOIN DEPARTMENT d ON e.DEPARTMENT = d.DEPARTMENT_ID\r\n" + //
+                        ";"; 
         
         System.out.println("SQL Solution: " + sqlQuery);
         return sqlQuery;
